@@ -5,10 +5,15 @@ import '../../../core/services/mock_bluetooth_service.dart';
 import '../model/bluetooth_device_model.dart';
 
 class DeviceListingViewModel extends ChangeNotifier {
-  DeviceListingViewModel({BluetoothService? service})
-    : _service = service ?? MockBluetoothService();
+  DeviceListingViewModel({BluetoothService? service}) {
+    if (service != null) {
+      _service = service;
+    } else {
+      _service = MockBluetoothService();
+    }
+  }
 
-  final BluetoothService _service;
+  late final BluetoothService _service;
 
   bool _isScanning = false;
   bool _isBluetoothAvailable = true;
