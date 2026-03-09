@@ -34,7 +34,7 @@ This file is the single source of truth for project context so any agent can res
 ## Proposed Tech Choices
 - Framework: Flutter (stable)
 - Language: Dart
-- Bluetooth package (candidate): `flutter_bluetooth_serial` or `flutter_blue_plus`
+- Bluetooth package (candidate): `flutter_bluetooth_serial` or `flutter_blue_plus`(Better choice because it has more download)
 - State management: `provider` (selected)
 - Architecture pattern: MVVM
 - Navigation: Flutter Navigator 2-screen flow
@@ -49,7 +49,7 @@ Note: Final package choice should be confirmed before coding due API/platform di
 - Render discovered devices in list
 - Tap device to connect and navigate to Chat Screen
 - Loading/error/empty states
-- Optional action: scan QR code to join/connect quickly
+- Optional action: scan QR code to join/connect quickly(We will implment later when thigs working as intended)
 
 ### Chat Screen
 - Header with connected device name/address + connection status
@@ -74,7 +74,7 @@ Note: Final package choice should be confirmed before coding due API/platform di
 - Add Bluetooth + location/runtime permissions (depends on Android SDK level)
 - Handle Android 12+ Bluetooth permission model (`BLUETOOTH_SCAN`, `BLUETOOTH_CONNECT`)
 
-### iOS (required target)
+### iOS
 - Add required Bluetooth usage descriptions in `Info.plist`
 - Verify plugin iOS support before implementation
 
@@ -100,15 +100,19 @@ Note: Final package choice should be confirmed before coding due API/platform di
 - Permission handling can consume most initial setup time
 - Emulator support for Bluetooth is limited; real-device testing is likely required
 
+## Current Status
+- Global app theme and color palette are set with light/dark mode support.
+- MVVM project structure is scaffolded for both MVP features (`device_listing` and `chat`).
+- `provider` is added and wired through app-level `MultiProvider`.
+- Bluetooth plugin is not integrated yet; a mock Bluetooth service is used as a temporary implementation.
+
 ## Next Actions
-1. Confirm Bluetooth plugin compatible with both Android and iOS for MVP
-2. Finalize initial app color palette to support both light theme now and dark mode later
-3. Initialize Flutter project scaffold (if not already present), set up `provider`, and shared theme structure
-4. Implement Device Listing Screen with permission + scan flow
-5. Decide whether to include basic QR join in MVP or Phase 2
-6. Implement Chat Screen with connection + send/receive text
-7. Identify any plugin gaps and define platform channel fallback points
-8. Run real-device validation and document findings
+1. Finalize Bluetooth plugin choice (`flutter_blue_plus` vs `flutter_bluetooth_serial`) and lock one.
+2. Replace mock Bluetooth service with real scan/connect/send/receive implementation.
+3. Add Android and iOS Bluetooth permission handling and platform config.
+4. Add connection state and disconnect flow in chat screen.
+5. Add lightweight logging for Bluetooth events and errors.
+
 
 ---
 
@@ -126,6 +130,17 @@ Note: Final package choice should be confirmed before coding due API/platform di
 - Added strategy to leverage platform channels for robustness when plugin behavior is insufficient.
 - Set architecture to MVVM and removed temporary project-structure section.
 - Added optional QR-code join path on Device Listing, and noted QR payload design as an open question.
+
+### 2026-03-09 17:33
+- Added `provider` dependency and wired app-level `MultiProvider`.
+- Replaced flat starter setup with MVVM scaffolding:
+  - `core/services` for Bluetooth service interface and mock implementation
+  - `features/device_listing/{model,view_model,view,widget}`
+  - `features/chat/{model,view_model,view,widget}`
+- Switched app entrypoint to `BlueChatApp` and set Device Listing as initial screen.
+- Removed default counter-template flow and replaced with MVP-aligned screen skeletons.
+- Updated widget test to target the new app structure.
+- Verified with `flutter analyze` (no issues).
 
 ---
 
