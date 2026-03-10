@@ -1,3 +1,4 @@
+import 'package:blue_chat/features/device_listing/widget/theme_toggle_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +29,10 @@ class _DeviceListingScreenState extends State<DeviceListingScreen> {
     final vm = context.watch<DeviceListingViewModel>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Nearby Devices')),
+      appBar: AppBar(
+        title: const Text('Nearby Devices'),
+        actions: const [ThemeToggleButton()],
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16),

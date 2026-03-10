@@ -1,3 +1,4 @@
+import 'package:blue_chat/theme/theme_mode_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,14 +16,22 @@ class BlueChatApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => DeviceListingViewModel()),
         ChangeNotifierProvider(create: (_) => ChatViewModel()),
+        ChangeNotifierProvider(
+          create: (_) => ThemeModeController()..loadThemeMode(),
+        ),
       ],
-      child: MaterialApp(
-        title: 'Blue Chat',
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.light,
-        darkTheme: AppTheme.dark,
-        themeMode: ThemeMode.system,
-        home: const DeviceListingScreen(),
+      child: Consumer<ThemeModeController>(
+        builder:
+            (BuildContext context, ThemeModeController value, Widget? child) {
+              return MaterialApp(
+                title: 'Blue Chat',
+                debugShowCheckedModeBanner: false,
+                theme: AppTheme.light,
+                darkTheme: AppTheme.dark,
+                themeMode: value.themeMode,
+                home: const DeviceListingScreen(),
+              );
+            },
       ),
     );
   }

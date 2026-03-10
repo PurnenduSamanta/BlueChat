@@ -105,6 +105,7 @@ Note: Final package choice should be confirmed before coding due API/platform di
 - MVVM project structure is scaffolded for both MVP features (`device_listing` and `chat`).
 - `provider` is added and wired through app-level `MultiProvider`.
 - Bluetooth plugin is not integrated yet; a mock Bluetooth service is used as a temporary implementation.
+- App orientation is locked to portrait (`portraitUp` and `portraitDown`) at startup for Android and iOS.
 
 ## Next Actions
 1. Finalize Bluetooth plugin choice (`flutter_blue_plus` vs `flutter_bluetooth_serial`) and lock one.
@@ -112,6 +113,7 @@ Note: Final package choice should be confirmed before coding due API/platform di
 3. Add Android and iOS Bluetooth permission handling and platform config.
 4. Add connection state and disconnect flow in chat screen.
 5. Add lightweight logging for Bluetooth events and errors.
+6. Verify portrait orientation behavior on real Android and iOS devices.
 
 
 ---
@@ -141,6 +143,13 @@ Note: Final package choice should be confirmed before coding due API/platform di
 - Removed default counter-template flow and replaced with MVP-aligned screen skeletons.
 - Updated widget test to target the new app structure.
 - Verified with `flutter analyze` (no issues).
+
+### 2026-03-10
+- Locked app orientation to portrait only (`portraitUp`, `portraitDown`) in `main.dart`.
+- Applied via `SystemChrome.setPreferredOrientations` before app startup so it affects both Android and iOS.
+- Added dark/light theme toggle in Device Listing AppBar.
+- Added theme state controller with `provider`.
+- Added `shared_preferences` and persisted selected theme mode.
 
 ---
 
