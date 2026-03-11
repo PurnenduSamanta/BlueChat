@@ -106,6 +106,7 @@ Note: Final package choice should be confirmed before coding due API/platform di
 - `provider` is added and wired through app-level `MultiProvider`.
 - Bluetooth plugin is not integrated yet; a mock Bluetooth service is used as a temporary implementation.
 - App orientation is locked to portrait (`portraitUp` and `portraitDown`) at startup for Android and iOS.
+- App icon setup is complete for Android and iOS, including adaptive Android icon layers.
 
 ## Next Actions
 1. Finalize Bluetooth plugin choice (`flutter_blue_plus` vs `flutter_bluetooth_serial`) and lock one.
@@ -150,6 +151,12 @@ Note: Final package choice should be confirmed before coding due API/platform di
 - Added dark/light theme toggle in Device Listing AppBar.
 - Added theme state controller with `provider`.
 - Added `shared_preferences` and persisted selected theme mode.
+
+### 2026-03-11
+- Added custom app icon assets and configured `flutter_launcher_icons`.
+- Generated Android launcher icons including adaptive foreground/background and monochrome support.
+- Generated iOS app icons and enabled `remove_alpha_ios: true` to satisfy App Store requirements.
+- Verified icon update on app launch.
 
 ---
 
