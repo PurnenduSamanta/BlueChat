@@ -107,6 +107,7 @@ Note: Final package choice should be confirmed before coding due API/platform di
 - Bluetooth plugin is not integrated yet; a mock Bluetooth service is used as a temporary implementation.
 - App orientation is locked to portrait (`portraitUp` and `portraitDown`) at startup for Android and iOS.
 - App icon setup is complete for Android and iOS, including adaptive Android icon layers.
+- Native splash is configured on Android and iOS using `flutter_native_splash`; splash logo quality is being refined.
 
 ## Next Actions
 1. Finalize Bluetooth plugin choice (`flutter_blue_plus` vs `flutter_bluetooth_serial`) and lock one.
@@ -157,6 +158,9 @@ Note: Final package choice should be confirmed before coding due API/platform di
 - Generated Android launcher icons including adaptive foreground/background and monochrome support.
 - Generated iOS app icons and enabled `remove_alpha_ios: true` to satisfy App Store requirements.
 - Verified icon update on app launch.
+- Added `flutter_native_splash` and `lottie` dependencies.
+- Configured and generated native splash resources for Android and iOS.
+- Added initial splash logo asset and started visual refinement to remove box/white-background artifacts.
 
 ---
 
